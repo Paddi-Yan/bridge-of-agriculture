@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.turing.mapper.OrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.turing.entity.Order">
+        <id column="id" property="id" />
+        <result column="machine_name" property="machineName" />
+        <result column="machine_id" property="machineId" />
+        <result column="count" property="count" />
+        <result column="specification" property="specification" />
+        <result column="days" property="days" />
+        <result column="price_per_day" property="pricePerDay" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="freight" property="freight" />
+        <result column="preference" property="preference" />
+        <result column="actual_amount" property="actualAmount" />
+        <result column="user_id" property="userId" />
+        <result column="username" property="username" />
+        <result column="business_id" property="businessId" />
+        <result column="status" property="status" />
+        <result column="created_time" property="createdTime" />
+        <result column="pay_time" property="payTime" />
+        <result column="pay_mode" property="payMode" />
+    </resultMap>
+
+</mapper>
