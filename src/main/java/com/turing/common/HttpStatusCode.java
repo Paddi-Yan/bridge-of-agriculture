@@ -6,6 +6,7 @@ package com.turing.common;
  */
 public enum HttpStatusCode {
     SUCCESS(200, "请求已经成功处理"),
+    NO_CONTENT(202,"请求已被服务器接受,但并未处理"),
     ERROR(500, "服务器内部发生错误"),
     NOT_FOUND(404, "请求路径不存在"),
     REQUEST_PARAM_ERROR(400, "请求携带参数错误"),

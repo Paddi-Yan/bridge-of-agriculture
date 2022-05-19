@@ -64,4 +64,6 @@ public class AuthLoginController {
         resultMap.put("userInfo", userVo);
         return Result.success(resultMap);
     }
+
+
 }

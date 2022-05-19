@@ -1,13 +1,25 @@
 package com.turing.common;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @Author: 又蠢又笨的懒羊羊程序猿
  * @CreateTime: 2022年05月18日 19:53:35
  */
+@Data
 public class Result {
     private Object data;
     private String message;
     private Integer code;
+
+    public static Result success() {
+        Result result = new Result();
+        result.setCode(HttpStatusCode.SUCCESS.getCode());
+        result.setMessage(HttpStatusCode.SUCCESS.getMessage());
+        return result;
+    }
 
     public static Result success(Object data) {
         Result result = new Result();

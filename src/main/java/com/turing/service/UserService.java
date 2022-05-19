@@ -14,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface UserService extends IService<User> {
 
     User getUserByOpenId(String openid);
+
+    User bindEmail(String email, User user);
+
+    void bindMobile(Long userId, String phoneNumbers, String code) throws Exception;
 }

@@ -26,8 +26,6 @@ public class UserVo implements Serializable {
 
     private String nickname;
 
-    private String mobile;
-
     private String openid;
 
     private String email;

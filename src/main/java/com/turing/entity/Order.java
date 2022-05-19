@@ -78,6 +78,7 @@ public class Order implements Serializable {
     @ApiModelProperty("支付时间")
     private LocalDateTime payTime;
 
+    @ApiModelProperty("支付方式")
     private String payMode;
 
 

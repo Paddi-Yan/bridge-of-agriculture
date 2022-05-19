@@ -26,6 +26,7 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     private String username;
@@ -34,7 +35,7 @@ public class Address implements Serializable {
 
     private String address;
 
-    private Integer userId;
+    private Long userId;
 
 
 }
