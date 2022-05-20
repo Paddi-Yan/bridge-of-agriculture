@@ -2,10 +2,7 @@ package com.turing.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.turing.common.HttpStatusCode;
-import com.turing.common.PassToken;
-import com.turing.common.Result;
-import com.turing.common.TokenInfo;
+import com.turing.common.*;
 import com.turing.utils.JWTUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +47,7 @@ public class AuthenticateInterceptor implements HandlerInterceptor {
             return errorResponse(response);
         }
         //是否存在改token
-        Boolean exited = redisTemplate.hasKey(token);
+        Boolean exited = redisTemplate.hasKey(RedisKey.TOKEN+token);
         if(!exited) {
             return errorResponse(response);
         }

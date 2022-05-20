@@ -35,8 +35,8 @@ public class BridgeOfAgricultureApplicationTests {
         SendSmsRequest sendSmsRequest = new SendSmsRequest()
                 .setSignName("阿里云短信测试")
                 .setTemplateCode("SMS_154950909")
-                .setPhoneNumbers("15089123344")
-                .setTemplateParam("{\"code\":\"1234\"}");
+                .setPhoneNumbers("13530175677")
+                .setTemplateParam("{\"code\":\"8888\"}");
         RuntimeOptions runtime = new RuntimeOptions();
         // 复制代码运行请自行打印 API 的返回值
         SendSmsResponse response = client.sendSmsWithOptions(sendSmsRequest, runtime);

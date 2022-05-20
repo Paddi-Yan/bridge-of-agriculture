@@ -8,6 +8,7 @@ import com.turing.common.Result;
 import com.turing.entity.User;
 import com.turing.entity.vo.UserVo;
 import com.turing.service.AuthLoginService;
+import com.turing.utils.RegexUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -49,21 +50,33 @@ public class AuthLoginController {
         if(openid == null || sessionKey == null) {
             return Result.fail(HttpStatusCode.ERROR,"调用官方微信登录接口错误!");
         }
-        User user = null;
+        Map<String,Object> resultMap = null;
         try {
-            user = authLoginService.wechatLogin(openid, sessionKey, nickname, avatar);
+            resultMap = authLoginService.wechatLogin(openid, sessionKey, nickname, avatar);
         } catch(Exception e) {
             log.warn(e.getMessage());
             return Result.fail(HttpStatusCode.ERROR,e.getMessage());
         }
-        UserVo userVo = new UserVo();
-        userVo.transform(user);
-        Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("openid", openid);
         resultMap.put("sessionKey", sessionKey);
-        resultMap.put("userInfo", userVo);
         return Result.success(resultMap);
     }
 
-
+    @PostMapping("/messageLogin")
+    @ApiOperation("短信登录/注册-不需要认证")
+    @ResponseBody
+    @PassToken
+    public Result messageLogin(@RequestParam String phoneNumber,@RequestParam String code) {
+        if(!RegexUtils.isPhoneNumbers(phoneNumber)) {
+            return Result.fail(HttpStatusCode.REQUEST_PARAM_ERROR,"手机号不合法,操作失败!");
+        }
+        Map<String, Object> resultMap = null;
+        try {
+            resultMap = authLoginService.messageLogin(phoneNumber, code);
+        } catch(Exception e) {
+            log.info(e.getMessage());
+            return Result.fail(HttpStatusCode.NO_CONTENT,"操作失败!");
+        }
+        return Result.success(resultMap);
+    }
 }
