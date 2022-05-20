@@ -54,7 +54,7 @@ public class AuthenticateInterceptor implements HandlerInterceptor {
         if(JWTUtils.isExpired(token)) {
             return errorResponse(response);
         }
-        TokenInfo tokenInfo = (TokenInfo) redisTemplate.opsForValue().get(token);
+        TokenInfo tokenInfo = (TokenInfo) redisTemplate.opsForValue().get(RedisKey.TOKEN+token);
         if(tokenInfo == null || !tokenInfo.getId().equals(JWTUtils.getUserId(token))) {
             return errorResponse(response);
         }
