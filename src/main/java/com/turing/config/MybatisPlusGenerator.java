@@ -21,13 +21,13 @@ public class MybatisPlusGenerator {
                          .globalConfig(builder -> {
                              builder.author("qds") // 设置作者
                                     .enableSwagger() // 开启 swagger 模式
-//                                    .fileOverride() // 覆盖已生成文件
-                                    .outputDir("property+\\src\\main\\java"); // 指定输出目录
+                                    .fileOverride() // 覆盖已生成文件
+                                    .outputDir(property+"\\src\\main\\java"); // 指定输出目录
                          })
                          .packageConfig(builder -> {
                              builder.parent("com") // 设置父包名
                                     .moduleName("turing") // 设置父包模块名
-                                    .pathInfo(Collections.singletonMap(OutputFile.mapperXml,"\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
+                                    .pathInfo(Collections.singletonMap(OutputFile.mapperXml,"I:\\ProjectAll\\兴农之桥\\xnzq\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
                          })
                          .strategyConfig(builder -> {
                              builder.addInclude("sys_element","sys_machine","sys_picture") // 设置需要生成的表名
