@@ -16,7 +16,8 @@ import java.util.Collections;
 public class MybatisPlusGenerator {
     public static void main(String[] args) {
         String property = System.getProperty("user.dir");
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306/wx_mini_db?useUnicode=true&characterEncoding=utf-8&useSSL=false", "root", "123456")
+        System.out.println(property);
+        FastAutoGenerator.create("jdbc:mysql://119.23.54.229:3306/wx_mini_db?useUnicode=true&characterEncoding=utf-8&useSSL=false", "root", "123456")
                          .globalConfig(builder -> {
                              builder.author("qds") // 设置作者
                                     .enableSwagger() // 开启 swagger 模式
@@ -26,10 +27,10 @@ public class MybatisPlusGenerator {
                          .packageConfig(builder -> {
                              builder.parent("com") // 设置父包名
                                     .moduleName("turing") // 设置父包模块名
-                                    .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "D:\\IntelliJ IDEA Project Home\\bridge-of-agriculture\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
+                                    .pathInfo(Collections.singletonMap(OutputFile.mapperXml,"\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
                          })
                          .strategyConfig(builder -> {
-                             builder.addInclude("sys_address","sys_order","sys_pay_log","sys_type","sys_user") // 设置需要生成的表名
+                             builder.addInclude("sys_element","sys_machine","sys_picture") // 设置需要生成的表名
                                     .addTablePrefix("sys_"); // 设置过滤表前缀
                              builder.entityBuilder()
                                     .enableLombok()
