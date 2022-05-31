@@ -15,12 +15,13 @@ import java.util.Collections;
  */
 public class MybatisPlusGenerator {
     public static void main(String[] args) {
+        String property = System.getProperty("user.dir");
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/wx_mini_db?useUnicode=true&characterEncoding=utf-8&useSSL=false", "root", "123456")
                          .globalConfig(builder -> {
-                             builder.author("又蠢又笨的懒羊羊程序猿") // 设置作者
+                             builder.author("qds") // 设置作者
                                     .enableSwagger() // 开启 swagger 模式
-                                    .fileOverride() // 覆盖已生成文件
-                                    .outputDir("D:\\IntelliJ IDEA Project Home\\bridge-of-agriculture\\src\\main\\java"); // 指定输出目录
+//                                    .fileOverride() // 覆盖已生成文件
+                                    .outputDir("property+\\src\\main\\java"); // 指定输出目录
                          })
                          .packageConfig(builder -> {
                              builder.parent("com") // 设置父包名
