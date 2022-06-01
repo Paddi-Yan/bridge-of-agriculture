@@ -1,4 +1,4 @@
-package com.turing.controller;
+package com.turing.controller.user;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-05-31
  */
 @RestController
-@RequestMapping("/turing/element")
-public class ElementController {
+@RequestMapping("/turing/picture")
+public class PictureController {
 
 }
 

@@ -13,7 +13,8 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,9 @@ public class MachineDto implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty("种类")
+    private String type;
+
     @ApiModelProperty("机械名称")
     private String name;
 
@@ -50,20 +54,25 @@ public class MachineDto implements Serializable {
     @ApiModelProperty("数量")
     private Integer amount;
 
-    @ApiModelProperty("纬度")
-    private BigDecimal lat;
+    @ApiModelProperty("距离")
+    private Double distance;
 
-    @ApiModelProperty("经度")
-    private BigDecimal lng;
+    private List<String> pictureList = new ArrayList<>();
 
-    private List<String> pictureList;
+    private Map<String,String> element= new HashMap<>();
 
-    private Map<String,String> element;
+    public void transform(Machine machine,List<String> pictureList){
+        //缺少距离测算
+        this.distance = 1.4;
+
+        BeanUtils.copyProperties(machine,this);
+        if (pictureList != null) this.pictureList.addAll(pictureList);
+    }
 
     public void transform(Machine machine,List<String> pictureList,Map<String,String> element){
         BeanUtils.copyProperties(machine,this);
-        this.pictureList.addAll(pictureList);
-        this.element.putAll(element);
+        if (pictureList != null) this.pictureList.addAll(pictureList);
+        if (element != null)this.element.putAll(element);
     }
 
 

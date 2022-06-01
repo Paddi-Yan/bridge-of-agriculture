@@ -33,6 +33,9 @@ public class Machine implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty("种类")
+    private String type;
+
     @ApiModelProperty("机械名称")
     private String name;
 

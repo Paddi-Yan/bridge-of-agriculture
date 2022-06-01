@@ -1,5 +1,6 @@
 package com.turing.service;
 
+import com.turing.common.Result;
 import com.turing.entity.Machine;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MachineService extends IService<Machine> {
 
+    Result getParticular(Integer m_id);
+
+
+    Result getParticularPlus(Integer m_id);
 }

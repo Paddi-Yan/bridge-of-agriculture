@@ -33,10 +33,10 @@ public class Element implements Serializable {
     private Long mId;
 
     @ApiModelProperty("机械元素key")
-    private String key;
+    private String ekey;
 
     @ApiModelProperty("机械元素value")
-    private String value;
+    private String evalue;
 
 
 }

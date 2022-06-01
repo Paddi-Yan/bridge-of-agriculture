@@ -1,4 +1,4 @@
-package com.turing.controller;
+package com.turing.controller.user;
 
 
 import com.turing.common.HttpStatusCode;
@@ -24,10 +24,14 @@ public class MachineController {
     @Autowired
     MachineService machineService;
 
-    public Result particulars(@RequestParam(value = "",required = false) Integer machineId) {
-        Machine byId = machineService.getById(machineId);
+    @GetMapping("/particular")
+    public Result particular(@RequestParam(value = "machineId",required = false) Integer machineId) {
+        return machineService.getParticular(machineId);
+    }
 
-        return Result.success();
+    @GetMapping("/particularPlus")
+    public Result particularPlus(@RequestParam(value = "machineId",required = false) Integer machineId) {
+        return machineService.getParticularPlus(machineId);
     }
 }
 
