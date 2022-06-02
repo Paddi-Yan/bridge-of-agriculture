@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.turing.mapper.ElementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.turing.entity.Element">
+        <id column="id" property="id"/>
+        <result column="m_id" property="mId"/>
+        <result column="ekey" property="ekey"/>
+        <result column="evalue" property="evalue"/>
+    </resultMap>
+
+</mapper>
