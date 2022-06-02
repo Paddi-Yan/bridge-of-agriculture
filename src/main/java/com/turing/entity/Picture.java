@@ -24,7 +24,7 @@ import lombok.Setter;
 @TableName("sys_picture")
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "Picture对象", description = "")
+@ApiModel(value = "农机图片", description = "")
 public class Picture implements Serializable {
 
     private static final long serialVersionUID = 1L;

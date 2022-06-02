@@ -19,7 +19,7 @@ import lombok.*;
 @Getter
 @Setter
 @TableName("sys_element")
-@ApiModel(value = "Element对象", description = "")
+@ApiModel(value = "农机详情元素", description = "")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Element implements Serializable {

@@ -1,8 +1,11 @@
 package com.turing.mapper;
 
+import com.turing.entity.Dto.MachineDto;
 import com.turing.entity.Machine;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MachineMapper extends BaseMapper<Machine> {
+
+    public List<Machine> latest();
+
 
 }

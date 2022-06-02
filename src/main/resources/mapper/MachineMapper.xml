@@ -13,4 +13,9 @@
         <result column="lng" property="lng" />
     </resultMap>
 
+
+
+    <select id="latest" resultType="com.turing.entity.Machine">
+        select * from sys_machine order by not publish_time limit 20
+    </select>
 </mapper>

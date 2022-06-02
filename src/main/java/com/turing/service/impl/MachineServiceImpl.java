@@ -9,17 +9,14 @@ import com.turing.entity.Picture;
 import com.turing.mapper.ElementMapper;
 import com.turing.mapper.MachineMapper;
 import com.turing.mapper.PictureMapper;
-import com.turing.service.ElementService;
 import com.turing.service.MachineService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -61,7 +58,6 @@ public class MachineServiceImpl extends ServiceImpl<MachineMapper, Machine> impl
         QueryWrapper<Element> queryWrapper1 = new QueryWrapper<>();
         queryWrapper1.eq("m_id",m_id);
         List<Element> elements = elementMapper.selectList(queryWrapper1);
-        System.out.println(elements.toString());
         Map<String,String> map = new HashMap<>();
         for (Element element : elements) {
             map.put(element.getEkey(),element.getEvalue());
@@ -70,4 +66,20 @@ public class MachineServiceImpl extends ServiceImpl<MachineMapper, Machine> impl
         machineDto.transform(machine,collect,map);
         return Result.success(machineDto);
     }
+
+    @Override
+    public Result latest() {
+        List<Machine> latest = machineMapper.latest();
+        List<Object> list = latest.stream().map(a -> {
+            MachineDto machineDto = new MachineDto();
+            QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("m_id", a.getId());
+            List<Picture> pictures = pictureMapper.selectList(queryWrapper);
+            List<String> collect = pictures.stream().map(b -> b.getAddress()).collect(Collectors.toList());
+            machineDto.transform(a, collect);
+            return machineDto;
+        }).collect(Collectors.toList());
+        return Result.success(list);
+    }
+
 }

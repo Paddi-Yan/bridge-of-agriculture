@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.Map;
 @Getter
 @Setter
 @TableName("sys_machine")
-@ApiModel(value = "Machine对象", description = "")
+@ApiModel(value = "农机Dto", description = "")
 @AllArgsConstructor
 @NoArgsConstructor
 public class MachineDto implements Serializable {
@@ -53,6 +54,15 @@ public class MachineDto implements Serializable {
 
     @ApiModelProperty("数量")
     private Integer amount;
+
+    @ApiModelProperty("发货地址")
+    private String deliverAddress;
+
+    @ApiModelProperty("销量")
+    private Integer sales;
+
+    @ApiModelProperty("发布时间")
+    private LocalDateTime publishTime;
 
     @ApiModelProperty("距离")
     private Double distance;
