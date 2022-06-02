@@ -3,17 +3,18 @@ package com.turing.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 又蠢又笨的懒羊羊程序猿
@@ -38,9 +39,6 @@ public class Order implements Serializable {
 
     @ApiModelProperty("租赁机器数量")
     private Integer count;
-
-    @ApiModelProperty("机器规格")
-    private String specification;
 
     @ApiModelProperty("租赁总天数")
     private Integer days;
@@ -81,5 +79,19 @@ public class Order implements Serializable {
     @ApiModelProperty("支付方式")
     private String payMode;
 
+    @ApiModelProperty("租借开始时间")
+    private LocalDateTime startRentTime;
+
+    @ApiModelProperty("归还时间")
+    private LocalDateTime returnTime;
+
+    @ApiModelProperty("归还截止时间")
+    private LocalDateTime returnDeadline;
+
+    @ApiModelProperty("发货地址")
+    private String deliverAddress;
+
+    @ApiModelProperty("收货地址ID")
+    private Long receivedAddressId;
 
 }

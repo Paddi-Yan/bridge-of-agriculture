@@ -3,7 +3,6 @@ package com.turing.service.impl;
 import cn.hutool.http.HttpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.turing.common.RedisKey;
-import com.turing.common.Result;
 import com.turing.common.TokenInfo;
 import com.turing.entity.User;
 import com.turing.entity.vo.UserVo;
@@ -62,16 +61,19 @@ public class AuthLoginServiceImpl implements AuthLoginService {
     }
 
     @Override
-    public Map<String,Object> wechatLogin(String openid, String sessionKey, String nickname, String avatar) throws Exception {
+    public Map<String, Object> wechatLogin(String openid,
+                                           String sessionKey,
+                                           String nickname,
+                                           String avatar) throws Exception {
         //通过openid唯一标识取查询数据库是否有用户信息
         User user = userService.getUserByOpenId(openid);
         return commonLogin(openid, nickname, avatar, user);
     }
 
     private Map<String, Object> commonLogin(String openid,
-                                                   String nickname,
-                                                   String avatar,
-                                                   User user) throws Exception {
+                                            String nickname,
+                                            String avatar,
+                                            User user) throws Exception {
         if(user == null) {
             //注册
             user = new User();
@@ -80,7 +82,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
             user.setOpenid(openid);
             user.setRegisterTime(LocalDateTime.now());
             return this.registry(user);
-        }else {
+        } else {
             //登录
             user.setNickname(nickname);
             user.setAvatar(avatar);
@@ -98,36 +100,41 @@ public class AuthLoginServiceImpl implements AuthLoginService {
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("mobile", phoneNumber));
         if(user == null) {
             //注册
-            return commonLogin(null,null,null, null);
-        }else {
+            return commonLogin(null, null, null, null);
+        } else {
             //登录
             return commonLogin(user.getOpenid(), user.getNickname(), user.getAvatar(), user);
         }
     }
 
-    private Map<String,Object> registry(User user) throws Exception {
+    @Override
+    public void logout(String token) {
+        redisTemplate.delete(RedisKey.TOKEN + token);
+    }
+
+    private Map<String, Object> registry(User user) throws Exception {
         int count = userMapper.insert(user);
         if(count != 1) {
             throw new Exception("注册失败!");
         }
-        log.info("新用户注册成功:{}",user);
+        log.info("新用户注册成功:{}", user);
         return this.login(user);
     }
 
-    private Map<String,Object> login(User user) {
+    private Map<String, Object> login(User user) {
         String token = JWTUtils.sign(user.getId());
         TokenInfo tokenInfo = new TokenInfo();
         tokenInfo.setId(user.getId());
         tokenInfo.setName(user.getNickname());
         tokenInfo.setType(TokenInfo.USER_TYPE);
-        log.info("用户登录成功:{}",user);
-        log.info("用户[{}]登录有效凭证[{}]",user, RedisKey.TOKEN+token);
-        redisTemplate.opsForValue().set(RedisKey.TOKEN+token,tokenInfo,7, TimeUnit.DAYS);
+        log.info("用户登录成功:{}", user);
+        log.info("用户[{}]登录有效凭证[{}]", user, RedisKey.TOKEN + token);
+        redisTemplate.opsForValue().set(RedisKey.TOKEN + token, tokenInfo, 7, TimeUnit.DAYS);
         HashMap<String, Object> result = new HashMap<>();
-        result.put("token",token);
+        result.put("token", token);
         UserVo userVo = new UserVo();
         userVo.transform(user);
-        result.put("userInfo",userVo);
+        result.put("userInfo", userVo);
         return result;
     }
 }

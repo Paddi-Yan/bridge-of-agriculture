@@ -28,16 +28,16 @@ public class DateConverterConfig implements Converter<String, Date> {
     @Override
     public Date convert(String source) {
         String value = source.trim();
-        if ("".equals(value)) {
+        if("".equals(value)) {
             return null;
         }
-        if (source.matches("^\\d{4}-\\d{1,2}$")) {
+        if(source.matches("^\\d{4}-\\d{1,2}$")) {
             return parseDate(source, formarts.get(0));
-        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")) {
+        } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")) {
             return parseDate(source, formarts.get(1));
-        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}$")) {
+        } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}$")) {
             return parseDate(source, formarts.get(2));
-        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")) {
+        } else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")) {
             return parseDate(source, formarts.get(3));
         } else {
             throw new IllegalArgumentException("Invalid boolean value '" + source + "'");
@@ -56,7 +56,7 @@ public class DateConverterConfig implements Converter<String, Date> {
         try {
             DateFormat dateFormat = new SimpleDateFormat(format);
             date = dateFormat.parse(dateStr);
-        } catch (Exception e) {
+        } catch(Exception e) {
 
         }
         return date;

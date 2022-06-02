@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 又蠢又笨的懒羊羊程序猿
@@ -34,7 +34,7 @@ public class AddressController {
     @PostMapping("/update")
     public Result update(@RequestBody Address address) {
         if(address.getId() == null || address.getUserId() == null) {
-            return Result.fail(HttpStatusCode.REQUEST_PARAM_ERROR,"携带参数不完整!");
+            return Result.fail(HttpStatusCode.REQUEST_PARAM_ERROR, "携带参数不完整!");
         }
         addressService.updateById(address);
         return Result.success();

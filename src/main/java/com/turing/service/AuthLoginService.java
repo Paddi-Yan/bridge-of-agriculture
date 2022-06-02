@@ -1,8 +1,5 @@
 package com.turing.service;
 
-import com.turing.common.Result;
-import com.turing.entity.User;
-
 import java.util.Map;
 
 /**
@@ -13,7 +10,9 @@ public interface AuthLoginService {
 
     String getSessionKey(String code);
 
-    Map<String,Object> wechatLogin(String openid, String sessionKey, String nickname, String avatar) throws Exception;
+    Map<String, Object> wechatLogin(String openid, String sessionKey, String nickname, String avatar) throws Exception;
 
-    Map<String,Object> messageLogin(String phoneNumber, String code) throws Exception;
+    Map<String, Object> messageLogin(String phoneNumber, String code) throws Exception;
+
+    void logout(String token);
 }

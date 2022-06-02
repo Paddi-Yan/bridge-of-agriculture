@@ -47,14 +47,14 @@ public class AuthenticateInterceptor implements HandlerInterceptor {
             return errorResponse(response);
         }
         //是否存在改token
-        Boolean exited = redisTemplate.hasKey(RedisKey.TOKEN+token);
+        Boolean exited = redisTemplate.hasKey(RedisKey.TOKEN + token);
         if(!exited) {
             return errorResponse(response);
         }
         if(JWTUtils.isExpired(token)) {
             return errorResponse(response);
         }
-        TokenInfo tokenInfo = (TokenInfo) redisTemplate.opsForValue().get(RedisKey.TOKEN+token);
+        TokenInfo tokenInfo = (TokenInfo) redisTemplate.opsForValue().get(RedisKey.TOKEN + token);
         if(tokenInfo == null || !tokenInfo.getId().equals(JWTUtils.getUserId(token))) {
             return errorResponse(response);
         }

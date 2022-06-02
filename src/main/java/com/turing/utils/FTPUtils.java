@@ -35,11 +35,11 @@ public class FTPUtils {
             filename = file.getOriginalFilename();
             filename = UUID.randomUUID() + "-" + filename;
             boolean storeFile = client.storeFile(filename, inputStream);
-            if (storeFile) {
+            if(storeFile) {
                 log.info("文件[{}]上传成功!", (DATE + filename));
             }
             return DATE + filename;
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
             log.warn("文件[{}]上传失败!", (DATE + filename));
         } finally {
@@ -54,7 +54,7 @@ public class FTPUtils {
         client.changeWorkingDirectory(FTP_DELETE_BASEPATH + filepath);
         String filename = filePath.substring(filePath.lastIndexOf("/") + 1);
         boolean deleteStates = client.deleteFile(filename);
-        if (!deleteStates) {
+        if(!deleteStates) {
             log.warn("文件[{}]删除失败!", filepath + filename);
         } else {
             log.info("文件[{}]删除成功!", filepath + filename);
@@ -67,14 +67,14 @@ public class FTPUtils {
         client.setControlEncoding("utf-8");
         client.connect(FTP_ADDRESS, FTP_PORT);
         client.login(FTP_USERNAME, FTP_PASSWORD);
-        if (!FTPReply.isPositiveCompletion(client.getReplyCode())) {
+        if(!FTPReply.isPositiveCompletion(client.getReplyCode())) {
             client.disconnect();
             log.error("FTPClient Connected Error");
             throw new Exception("FTP服务器连接失败!");
         }
         log.info("FTPClient Connected Success!");
         client.setFileType(FTPClient.BINARY_FILE_TYPE);
-        if (!client.changeWorkingDirectory(FTP_BASEPATH)) {
+        if(!client.changeWorkingDirectory(FTP_BASEPATH)) {
             client.makeDirectory(FTP_BASEPATH);
             client.changeWorkingDirectory(FTP_BASEPATH);
         }
@@ -82,7 +82,7 @@ public class FTPUtils {
 
     private static void destroy() throws Exception {
         client.logout();
-        if (client.isConnected()) {
+        if(client.isConnected()) {
             client.disconnect();
         }
     }

@@ -1,8 +1,6 @@
 package com.turing.common;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @Author: 又蠢又笨的懒羊羊程序猿
@@ -36,7 +34,7 @@ public class Result {
         return result;
     }
 
-    public static Result fail(HttpStatusCode httpStatusCode,String message) {
+    public static Result fail(HttpStatusCode httpStatusCode, String message) {
         Result result = new Result();
         result.setCode(httpStatusCode.getCode());
         result.setMessage(message);

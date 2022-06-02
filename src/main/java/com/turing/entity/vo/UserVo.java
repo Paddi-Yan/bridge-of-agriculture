@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * @Author: 又蠢又笨的懒羊羊程序猿
@@ -33,6 +32,6 @@ public class UserVo implements Serializable {
     private String avatar;
 
     public void transform(User user) {
-        BeanUtils.copyProperties(user,this);
+        BeanUtils.copyProperties(user, this);
     }
 }

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,10 +43,10 @@ public class SendSmsServiceImpl implements SendSmsService {
     @Override
     public void sendMessage(String phoneNumbers) throws Exception {
         Client client = SendSmsUtils.createClient(accessKeyId, accessKeySecret);
-        log.info("签名:{},模板:{}",signName,templateCode);
+        log.info("签名:{},模板:{}", signName, templateCode);
         String code = generateCode();
         HashMap<String, String> param = new HashMap<>();
-        param.put("code",code);
+        param.put("code", code);
         SendSmsRequest sendSmsRequest = new SendSmsRequest()
                 .setSignName(signName)
                 .setTemplateCode(templateCode)
@@ -58,19 +57,19 @@ public class SendSmsServiceImpl implements SendSmsService {
         if(!"OK".equals(body.getCode())) {
             throw new Exception(body.getMessage());
         }
-        log.info("发送验证码[{}]至手机号[{}]成功",code,phoneNumbers);
+        log.info("发送验证码[{}]至手机号[{}]成功", code, phoneNumbers);
         //控制1分钟内只能发送一次验证码
-        redisTemplate.opsForValue().set(RedisKey.MESSAGE_SEND_CONTROL_KEY+phoneNumbers,code,1, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(RedisKey.MESSAGE_SEND_CONTROL_KEY + phoneNumbers, code, 1, TimeUnit.MINUTES);
         //先删除之前已经发送过并未过期的验证码
         String oldMessageCode = RedisKey.MESSAGE_CODE_KEY + phoneNumbers;
         if(redisTemplate.hasKey(oldMessageCode)) {
             redisTemplate.delete(oldMessageCode);
         }
         //消息验证码15分钟内有效
-        redisTemplate.opsForValue().set(RedisKey.MESSAGE_CODE_KEY+phoneNumbers,code,15,TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(RedisKey.MESSAGE_CODE_KEY + phoneNumbers, code, 15, TimeUnit.MINUTES);
     }
 
     private String generateCode() {
-        return (int)((Math.random()*9+1)*100000)+"";
+        return (int) ((Math.random() * 9 + 1) * 100000) + "";
     }
 }

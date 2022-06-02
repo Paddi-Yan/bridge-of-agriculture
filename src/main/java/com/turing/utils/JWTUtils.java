@@ -51,12 +51,12 @@ public class JWTUtils {
             jwtVerifier.verify(token);
             log.info("Token令牌'{}'校验成功! ", token);
             return true;
-        } catch (TokenExpiredException e) {
+        } catch(TokenExpiredException e) {
             log.error("Token令牌'{}'已过期，请重新登录! ", token);
             e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch(IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (JWTVerificationException e) {
+        } catch(JWTVerificationException e) {
             e.printStackTrace();
         }
         return false;
@@ -66,7 +66,7 @@ public class JWTUtils {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("id").asLong();
-        } catch (JWTDecodeException e) {
+        } catch(JWTDecodeException e) {
             e.printStackTrace();
             return null;
         }
@@ -77,9 +77,9 @@ public class JWTUtils {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             return JWT.create().withClaim("id", id).withExpiresAt(date).sign(algorithm);
-        } catch (IllegalArgumentException e) {
+        } catch(IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (JWTCreationException e) {
+        } catch(JWTCreationException e) {
             e.printStackTrace();
         }
         return null;

@@ -4,8 +4,8 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.turing.entity.Type">
-        <id column="id" property="id" />
-        <result column="type" property="type" />
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
     </resultMap>
 
 </mapper>
