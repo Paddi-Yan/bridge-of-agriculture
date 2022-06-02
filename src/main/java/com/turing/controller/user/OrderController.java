@@ -53,9 +53,9 @@ public class OrderController {
     @ResponseBody
     @PostMapping("/pay")
     @ApiOperation(value = "支付订单",notes = "需要认证")
-    public Result payOrder(@RequestParam(name = "支付方式")String payMode,
+    public Result payOrder(@RequestParam String payMode,
                            @RequestParam Long orderId,
-                           @RequestParam(name = "实付款") BigDecimal payAmount) {
+                           @RequestParam BigDecimal payAmount) {
         Order order = orderService.getById(orderId);
         if(order == null) {
             return Result.fail(HttpStatusCode.REQUEST_PARAM_ERROR,"订单不存在,支付失败!");

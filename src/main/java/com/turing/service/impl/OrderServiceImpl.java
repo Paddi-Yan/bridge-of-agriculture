@@ -7,6 +7,7 @@ import com.turing.entity.Order;
 import com.turing.entity.PayLog;
 import com.turing.entity.User;
 import com.turing.entity.dto.OrderDto;
+import com.turing.mapper.MachineMapper;
 import com.turing.mapper.OrderMapper;
 import com.turing.mapper.PayLogMapper;
 import com.turing.service.OrderService;
@@ -35,6 +36,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Resource
     private PayLogMapper payLogMapper;
 
+    @Resource
+    private MachineMapper machineMapper;
+
     @Override
     public Order submitOrder(User user, Machine machine, OrderDto orderDto) {
         Order order = new Order();
@@ -57,6 +61,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setReceivedAddressId(orderDto.getAddressId());
         orderMapper.insert(order);
         log.info("下单成功:[{}]",order);
+        machine.setStock(machine.getStock() - orderDto.getCount());
+        machine.setSales(machine.getSales() + orderDto.getCount());
+        machineMapper.updateById(machine);
+        log.info("扣减库存和增加销量成功:[{}]",machine);
         return order;
     }
 
