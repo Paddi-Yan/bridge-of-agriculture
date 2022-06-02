@@ -65,6 +65,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         machine.setSales(machine.getSales() + orderDto.getCount());
         machineMapper.updateById(machine);
         log.info("扣减库存和增加销量成功:[{}]",machine);
+
         return order;
     }
 
