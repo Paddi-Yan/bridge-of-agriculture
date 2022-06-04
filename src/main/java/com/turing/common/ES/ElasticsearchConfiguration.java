@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 
-//转换器配置
+//日期转换配置
 @Configuration
 public class ElasticsearchConfiguration extends ElasticsearchConfigurationSupport {
 

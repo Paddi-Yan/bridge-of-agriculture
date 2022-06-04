@@ -7,6 +7,8 @@ import com.turing.entity.Address;
 import com.turing.entity.Machine;
 import com.turing.service.MachineService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,14 +38,26 @@ public class MachineController {
 
     @GetMapping("/particular")
     @ApiOperation("农机详情")
-    public Result particular(@RequestParam(value = "machineId", required = false) Integer machineId) {
-        return machineService.getParticular(machineId);
+    @ApiImplicitParams(value = {
+                    @ApiImplicitParam(name = "lng",value = "用户经度"),
+                    @ApiImplicitParam(name = "lat",value = "用户纬度")})
+    public Result particular(@RequestParam(value = "machineId", required = true) Integer machineId,
+                             @RequestParam(value = "lng", required = false)Double lng,
+                             @RequestParam(value = "lat", required = false) Double lat) {
+        if (lng==null || lat== null) return machineService.getParticular(machineId);
+        return machineService.getParticular(machineId,lng,lat);
     }
 
     @GetMapping("/particularPlus")
     @ApiOperation("农机详情，展示数据")
-    public Result particularPlus(@RequestParam(value = "machineId", required = false) Integer machineId) {
-        return machineService.getParticularPlus(machineId);
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "lng",value = "用户经度"),
+            @ApiImplicitParam(name = "lat",value = "用户纬度")})
+    public Result particularPlus(@RequestParam(value = "machineId", required = true) Integer machineId,
+                                 @RequestParam(value = "lng", required = false)Double lng,
+                                 @RequestParam(value = "lat", required = false) Double lat) {
+        if (lng==null || lat== null) return machineService.getParticularPlus(machineId);
+        return machineService.getParticularPlus(machineId,lng,lat);
     }
 
     @GetMapping("/classify")

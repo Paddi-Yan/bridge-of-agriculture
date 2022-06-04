@@ -24,4 +24,8 @@ public interface MachineService extends IService<Machine> {
     Result latest();
 
     Result classify(long typeId);
+
+    Result getParticular(Integer machineId, Double lng, Double lat);
+
+    Result getParticularPlus(Integer machineId, Double lng, Double lat);
 }

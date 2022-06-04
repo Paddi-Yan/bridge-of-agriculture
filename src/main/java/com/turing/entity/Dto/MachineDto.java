@@ -72,14 +72,15 @@ public class MachineDto implements Serializable {
     private Map<String,String> element= new HashMap<>();
 
     public void transform(Machine machine,List<String> pictureList){
-        //缺少距离测算
-        this.distance = 1.4;
+
+        this.distance = -1.0;
 
         BeanUtils.copyProperties(machine,this);
         if (pictureList != null) this.pictureList.addAll(pictureList);
     }
 
     public void transform(Machine machine,List<String> pictureList,Map<String,String> element){
+        this.distance = -1.0;
         BeanUtils.copyProperties(machine,this);
         if (pictureList != null) this.pictureList.addAll(pictureList);
         if (element != null)this.element.putAll(element);
