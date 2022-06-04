@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,11 @@ public class MachineServiceImpl extends ServiceImpl<MachineMapper, Machine> impl
             return machineDto;
         }).collect(Collectors.toList());
         return Result.success(list);
+    }
+
+    @Override
+    public Result classify(long typeId) {
+        return Result.success(machineMapper.classify(typeId));
     }
 
 }

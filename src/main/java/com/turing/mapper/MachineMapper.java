@@ -1,10 +1,12 @@
 package com.turing.mapper;
 
+import com.turing.common.Result;
 import com.turing.entity.Dto.MachineDto;
 import com.turing.entity.Machine;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -18,7 +20,8 @@ import java.util.List;
 @Mapper
 public interface MachineMapper extends BaseMapper<Machine> {
 
-    public List<Machine> latest();
+    List<Machine> latest();
 
 
+    List<Machine> classify(long typeId);
 }

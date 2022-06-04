@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.turing.mapper.MachineMapper">
+<mapper namespace="com.turing.mapper.ProductMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.turing.entity.Machine">
+    <resultMap id="esProductMap" type="com.turing.common.ES.Product">
         <id column="id" property="id" />
         <result column="business_id" property="businessId" />
         <result column="type" property="type" />
@@ -19,13 +19,11 @@
         <result column="freight" property="freight" />
     </resultMap>
 
-
-
-    <select id="latest" resultType="com.turing.entity.Machine">
-        select * from sys_machine order by not publish_time limit 20
+    <select id="getAllProductList" resultMap="esProductMap" parameterType="long">
+        select * from sys_machine
+        <if test="id!=null">
+            where p.id=#{id}
+        </if>
     </select>
 
-    <select id="classify" resultType="com.turing.entity.Machine" parameterType="long">
-        select * from sys_machine where type  = #{typeId}
-    </select>
 </mapper>

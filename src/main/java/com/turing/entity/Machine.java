@@ -36,20 +36,23 @@ public class Machine implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty("商家编号")
+    private Long businessId;
+
     @ApiModelProperty("种类")
-    private String type;
+    private Long type;
 
     @ApiModelProperty("机械名称")
     private String name;
 
     @ApiModelProperty("一日价格")
-    private Long price;
+    private BigDecimal price;
 
     @ApiModelProperty("介绍")
     private String intro;
 
-    @ApiModelProperty("数量")
-    private Integer amount;
+    @ApiModelProperty("库存数量")
+    private Integer stock;
 
     @ApiModelProperty("纬度")
     private BigDecimal lat;
@@ -65,6 +68,9 @@ public class Machine implements Serializable {
 
     @ApiModelProperty("发布时间")
     private LocalDateTime publishTime;
+
+    @ApiModelProperty("运费")
+    private BigDecimal freight;
 
 
 }

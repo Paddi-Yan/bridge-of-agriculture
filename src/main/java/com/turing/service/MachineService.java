@@ -4,6 +4,8 @@ import com.turing.common.Result;
 import com.turing.entity.Machine;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.math.BigInteger;
+
 /**
  * <p>
  *  服务类
@@ -21,4 +23,5 @@ public interface MachineService extends IService<Machine> {
 
     Result latest();
 
+    Result classify(long typeId);
 }
