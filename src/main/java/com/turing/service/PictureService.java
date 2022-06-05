@@ -1,15 +1,15 @@
 package com.turing.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.turing.entity.Picture;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 服务类
+ *  服务类
  * </p>
  *
- * @author 又蠢又笨的懒羊羊程序猿
- * @since 2022-06-02
+ * @author qds
+ * @since 2022-05-31
  */
 public interface PictureService extends IService<Picture> {
 

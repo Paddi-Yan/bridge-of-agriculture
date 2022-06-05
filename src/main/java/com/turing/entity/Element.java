@@ -3,25 +3,25 @@ package com.turing.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.Serializable;
+import lombok.*;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
- * @author 又蠢又笨的懒羊羊程序猿
- * @since 2022-06-02
+ * @author qds
+ * @since 2022-05-31
  */
 @Getter
 @Setter
 @TableName("sys_element")
-@ApiModel(value = "Element对象", description = "")
+@ApiModel(value = "农机详情元素", description = "")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Element implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,18 +1,27 @@
 package com.turing.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.turing.common.Result;
+import com.turing.entity.Dto.MachineDto;
 import com.turing.entity.Machine;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.math.BigInteger;
+import java.util.List;
 
 /**
  * <p>
- * Mapper 接口
+ *  Mapper 接口
  * </p>
  *
- * @author 又蠢又笨的懒羊羊程序猿
- * @since 2022-06-02
+ * @author qds
+ * @since 2022-05-31
  */
 @Mapper
 public interface MachineMapper extends BaseMapper<Machine> {
 
+    List<Machine> latest();
+
+
+    List<Machine> classify(long typeId);
 }
