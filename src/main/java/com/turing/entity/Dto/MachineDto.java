@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,8 +53,8 @@ public class MachineDto implements Serializable {
     @ApiModelProperty("介绍")
     private String intro;
 
-    @ApiModelProperty("数量")
-    private Integer amount;
+    @ApiModelProperty("库存数量")
+    private Integer stock;
 
     @ApiModelProperty("发货地址")
     private String deliverAddress;
@@ -66,6 +67,9 @@ public class MachineDto implements Serializable {
 
     @ApiModelProperty("距离")
     private Double distance;
+
+    @ApiModelProperty("运费")
+    private BigDecimal freight;
 
     private List<String> pictureList = new ArrayList<>();
 
