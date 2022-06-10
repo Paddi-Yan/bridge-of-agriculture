@@ -3,6 +3,7 @@ package com.turing.entity.Dto;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.turing.common.ES.Product;
 import com.turing.entity.Machine;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -76,6 +77,14 @@ public class MachineDto implements Serializable {
     private Map<String,String> element= new HashMap<>();
 
     public void transform(Machine machine,List<String> pictureList){
+
+        this.distance = -1.0;
+
+        BeanUtils.copyProperties(machine,this);
+        if (pictureList != null) this.pictureList.addAll(pictureList);
+    }
+
+    public void transform(Product machine, List<String> pictureList){
 
         this.distance = -1.0;
 

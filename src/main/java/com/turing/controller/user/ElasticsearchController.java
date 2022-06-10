@@ -31,4 +31,31 @@ public class ElasticsearchController {
         Result search = esService.search(keyword, pageNum, pageSize);
         return search;
     }
+
+    @ApiOperation(value = "搜索,销量")
+    @RequestMapping(value = "/searchSales", method = RequestMethod.GET)
+    @ResponseBody
+    public Result searchSales(@RequestParam(required = false) String keyword) {
+        return esService.searchToSales(keyword);
+    }
+    @ApiOperation(value = "搜索,新品")
+    @RequestMapping(value = "/searchTime", method = RequestMethod.GET)
+    @ResponseBody
+    public Result searchTime(@RequestParam(required = false) String keyword) {
+        return esService.searchToS(keyword);
+    }
+
+    @ApiOperation(value = "搜索,价格升序")
+    @RequestMapping(value = "/searchPriceRise", method = RequestMethod.GET)
+    @ResponseBody
+    public Result searchPriceRise(@RequestParam(required = false) String keyword) {
+        return esService.searchToPriceRise(keyword);
+    }
+
+    @ApiOperation(value = "搜索,价格降序")
+    @RequestMapping(value = "/searchPriceDecline", method = RequestMethod.GET)
+    @ResponseBody
+    public Result searchPriceDecline(@RequestParam(required = false) String keyword) {
+        return esService.searchToPriceDecline(keyword);
+    }
 }

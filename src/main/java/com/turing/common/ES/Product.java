@@ -36,7 +36,7 @@ public class Product implements Serializable {
 
     @ApiModelProperty("一日价格")
     @Field(type = FieldType.Double)
-    private Long price;
+    private BigDecimal price;
 
     @ApiModelProperty("商家编号")
     private Long businessId;

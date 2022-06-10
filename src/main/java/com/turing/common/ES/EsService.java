@@ -30,4 +30,9 @@ public interface EsService {
      * 根据关键字搜索名称或者副标题
      */
     Result search(String keyword, Integer pageNum, Integer pageSize);
+
+    Result searchToSales(String keyword);
+    Result searchToS(String keyword);
+    Result searchToPriceRise(String keyword);
+    Result searchToPriceDecline(String keyword);
 }

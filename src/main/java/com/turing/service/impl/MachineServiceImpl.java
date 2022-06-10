@@ -87,7 +87,18 @@ public class MachineServiceImpl extends ServiceImpl<MachineMapper, Machine> impl
 
     @Override
     public Result classify(long typeId) {
-        return Result.success(machineMapper.classify(typeId));
+        List<Machine> classify = machineMapper.classify(typeId);
+        List<Object> list = classify.stream().map(a -> {
+            MachineDto machineDto = new MachineDto();
+            QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("m_id", a.getId());
+            List<Picture> pictures = pictureMapper.selectList(queryWrapper);
+            List<String> collect = pictures.stream().map(b -> b.getAddress()).collect(Collectors.toList());
+            machineDto.transform(a, collect);
+            return machineDto;
+        }).collect(Collectors.toList());
+
+        return Result.success(list);
     }
 
     @Override
