@@ -42,13 +42,13 @@ public class MachineDto implements Serializable {
     private Long id;
 
     @ApiModelProperty("种类")
-    private String type;
+    private Long type;
 
     @ApiModelProperty("机械名称")
     private String name;
 
     @ApiModelProperty("一日价格")
-    private Long price;
+    private BigDecimal price;
 
     @ApiModelProperty("介绍")
     private String intro;
