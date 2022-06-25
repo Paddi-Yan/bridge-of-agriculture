@@ -4,9 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.turing.entity.Picture">
-        <id column="id" property="id"/>
-        <result column="m_id" property="mId"/>
-        <result column="address" property="address"/>
+        <id column="id" property="id" />
+        <result column="m_id" property="mId" />
+        <result column="address" property="address" />
     </resultMap>
 
 </mapper>

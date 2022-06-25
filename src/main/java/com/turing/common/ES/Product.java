@@ -1,54 +1,48 @@
-package com.turing.entity;
+package com.turing.common.ES;
+
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-/**
- * <p>
- *
- * </p>
- *
- * @author qds
- * @since 2022-05-31
- */
-@Getter
-@Setter
-@TableName("sys_machine")
-@ApiModel(value = "农机", description = "")
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class Machine implements Serializable {
+@AllArgsConstructor
+@ToString
+@Document(indexName = "pms", shards = 1, replicas = 0)
+public class Product implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
+    @Id
     private Long id;
+
+    @ApiModelProperty("种类")
+    private String type;
+
+    @ApiModelProperty("机械名称")
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
+    private String name;
+
+    @ApiModelProperty("一日价格")
+    @Field(type = FieldType.Double)
+    private BigDecimal price;
 
     @ApiModelProperty("商家编号")
     private Long businessId;
 
-    @ApiModelProperty("种类")
-    private Long type;
-
-    @ApiModelProperty("机械名称")
-    private String name;
-
-    @ApiModelProperty("一日价格")
-    private BigDecimal price;
-
     @ApiModelProperty("介绍")
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String intro;
 
     @ApiModelProperty("库存数量")
@@ -61,6 +55,7 @@ public class Machine implements Serializable {
     private BigDecimal lng;
 
     @ApiModelProperty("发货地址")
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String deliverAddress;
 
     @ApiModelProperty("销量")
@@ -71,6 +66,4 @@ public class Machine implements Serializable {
 
     @ApiModelProperty("运费")
     private BigDecimal freight;
-
-
 }
