@@ -19,8 +19,6 @@
         <result column="freight" property="freight" />
     </resultMap>
 
-
-
     <select id="latest" resultType="com.turing.entity.Machine">
         select * from sys_machine order by not publish_time limit 20
     </select>
@@ -28,4 +26,11 @@
     <select id="classify" resultType="com.turing.entity.Machine" parameterType="long">
         select * from sys_machine where type  = #{typeId}
     </select>
+
+    <select id="byCrop" resultType="com.turing.entity.Machine">
+        select distinct m.*
+        from sys_machine m ,sys_crop c,sys_crop_machine cm
+        where cm.cropid &lt;= #{uid} and cm.cropid &gt;= #{did} and m.id = cm.machine
+    </select>
+
 </mapper>
