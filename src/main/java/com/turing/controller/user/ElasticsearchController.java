@@ -25,10 +25,8 @@ public class ElasticsearchController {
     @ApiOperation(value = "简单搜索")
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
-    public Result search(@RequestParam(required = false) String keyword,
-                                                      @RequestParam(required = false, defaultValue = "0") Integer pageNum,
-                                                      @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        Result search = esService.search(keyword, pageNum, pageSize);
+    public Result search(@RequestParam(required = false) String keyword) {
+        Result search = esService.search(keyword, 0, 100);
         return search;
     }
 

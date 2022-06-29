@@ -33,35 +33,23 @@ public class MachineController {
     @GetMapping("/latestPublish")
     @ApiOperation("最新发布")
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "lng",value = "用户经度"),
-            @ApiImplicitParam(name = "lat",value = "用户纬度")})
-    public Result latestPublish(@RequestParam(value = "lng", required = false)Double lng,
+            @ApiImplicitParam(name = "lng", value = "用户经度"),
+            @ApiImplicitParam(name = "lat", value = "用户纬度")})
+    public Result latestPublish(@RequestParam(value = "lng", required = false) Double lng,
                                 @RequestParam(value = "lat", required = false) Double lat) {
         return machineService.latest(lng, lat);
     }
 
     @GetMapping("/particular")
     @ApiOperation("农机详情")
-    @ApiImplicitParams(value = {
-                    @ApiImplicitParam(name = "lng",value = "用户经度"),
-                    @ApiImplicitParam(name = "lat",value = "用户纬度")})
-    public Result particular(@RequestParam(value = "machineId", required = true) Integer machineId,
-                             @RequestParam(value = "lng", required = false)Double lng,
-                             @RequestParam(value = "lat", required = false) Double lat) {
-        if (lng==null || lat== null) return machineService.getParticular(machineId);
-        return machineService.getParticular(machineId,lng,lat);
+    public Result particular(@RequestParam(value = "machineId", required = true) Integer machineId) {
+        return machineService.getParticular(machineId);
     }
 
     @GetMapping("/particularPlus")
     @ApiOperation("农机详情，展示数据")
-    @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "lng",value = "用户经度"),
-            @ApiImplicitParam(name = "lat",value = "用户纬度")})
-    public Result particularPlus(@RequestParam(value = "machineId", required = true) Integer machineId,
-                                 @RequestParam(value = "lng", required = false)Double lng,
-                                 @RequestParam(value = "lat", required = false) Double lat) {
-        if (lng==null || lat== null) return machineService.getParticularPlus(machineId);
-        return machineService.getParticularPlus(machineId,lng,lat);
+    public Result particularPlus(@RequestParam(value = "machineId", required = true) Integer machineId) {
+        return machineService.getParticularPlus(machineId);
     }
 
     @GetMapping("/classify")
