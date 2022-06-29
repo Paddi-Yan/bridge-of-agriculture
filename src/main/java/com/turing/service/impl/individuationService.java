@@ -9,6 +9,7 @@ import com.turing.entity.Machine;
 import com.turing.entity.Picture;
 import com.turing.mapper.MachineMapper;
 import com.turing.mapper.PictureMapper;
+import com.turing.mapper.TypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,17 +27,21 @@ public class individuationService {
     @Autowired
     PictureMapper pictureMapper;
 
+    @Autowired
+    TypeServiceImpl typeService;
+
     public Result individuation(Integer area, Integer up, Integer down
             , Integer peopleNumber, Integer time, String cropType, String typeId) {
 
         char[] cs = cropType.toCharArray();
         List<Integer> ins = new ArrayList<>();
         for (int i = 0; i < cs.length; i++) {
-            ins.add(Integer.valueOf((int)cs[i] - 96));
+//            ins.add(Integer.valueOf((int)cs[i] - 96));
+            ins.add(Integer.valueOf(cs[i]+""));
         }
 
 
-        List<Machine> machines = new ArrayList<>();
+        List<Machine> machines = null;
 
         machines = machineMapper.byCrop(ins);
 
@@ -66,6 +71,12 @@ public class individuationService {
     public static void main(String[] args) {
         char a = 'a';
         System.out.println((int)a -96 );
+    }
+
+    public Result getMachineType(Double lng, Double lat) {
+
+        return Result.success(typeService.list());
+
     }
 }
 

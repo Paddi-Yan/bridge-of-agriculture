@@ -30,7 +30,7 @@ public class MybatisPlusGenerator {
                                     .pathInfo(Collections.singletonMap(OutputFile.mapperXml,"I:\\ProjectAll\\兴农之桥\\xnzq\\src\\main\\java\\com\\turing\\qds")); // 设置mapperXml生成路径
                          })
                          .strategyConfig(builder -> {
-                             builder.addInclude("sys_element","sys_machine","sys_picture") // 设置需要生成的表名
+                             builder.addInclude("sys_crop") // 设置需要生成的表名
                                     .addTablePrefix("sys_"); // 设置过滤表前缀
                              builder.entityBuilder()
                                     .enableLombok()
