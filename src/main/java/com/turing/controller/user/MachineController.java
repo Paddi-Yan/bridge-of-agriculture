@@ -32,8 +32,12 @@ public class MachineController {
 
     @GetMapping("/latestPublish")
     @ApiOperation("最新发布")
-    public Result latestPublish() {
-        return machineService.latest();
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "lng",value = "用户经度"),
+            @ApiImplicitParam(name = "lat",value = "用户纬度")})
+    public Result latestPublish(@RequestParam(value = "lng", required = false)Double lng,
+                                @RequestParam(value = "lat", required = false) Double lat) {
+        return machineService.latest(lng, lat);
     }
 
     @GetMapping("/particular")

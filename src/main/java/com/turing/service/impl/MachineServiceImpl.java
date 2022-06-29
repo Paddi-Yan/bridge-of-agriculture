@@ -71,7 +71,7 @@ public class MachineServiceImpl extends ServiceImpl<MachineMapper, Machine> impl
     }
 
     @Override
-    public Result latest() {
+    public Result latest( Double lng, Double lat) {
         List<Machine> latest = machineMapper.latest();
         List<Object> list = latest.stream().map(a -> {
             MachineDto machineDto = new MachineDto();

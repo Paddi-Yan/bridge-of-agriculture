@@ -21,7 +21,7 @@ public interface MachineService extends IService<Machine> {
 
     Result getParticularPlus(Integer m_id);
 
-    Result latest();
+    Result latest( Double lng, Double lat);
 
     Result classify(long typeId);
 
