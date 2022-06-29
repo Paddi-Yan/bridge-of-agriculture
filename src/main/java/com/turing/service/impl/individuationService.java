@@ -1,6 +1,7 @@
 package com.turing.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.generator.config.INameConvert;
 import com.turing.common.Result;
 import com.turing.entity.Dto.MachineDto;
 import com.turing.entity.Dto.MachineIndivDto;
@@ -27,21 +28,28 @@ public class individuationService {
 
     public Result individuation(Integer area, Integer up, Integer down
             , Integer peopleNumber, Integer time, String cropType, String typeId) {
-        int c = cropType.charAt(0);
-        List<Machine> machines = new ArrayList<>();
-        if (c >= 97 && c <= 100) {
-            machines = machineMapper.byCrop(4, 1);
-        } else {
-            machines = machineMapper.byCrop(6, 5);
+
+        char[] cs = cropType.toCharArray();
+        List<Integer> ins = new ArrayList<>();
+        for (int i = 0; i < cs.length; i++) {
+            ins.add(Integer.valueOf((int)cs[i] - 96));
         }
+
+
+        List<Machine> machines = new ArrayList<>();
+
+        machines = machineMapper.byCrop(ins);
+
         List<MachineIndivDto> list = machines.stream().filter(a -> {
             if (a.getPrice().compareTo(BigDecimal.valueOf(up)) == 1
                     || a.getPrice().compareTo(BigDecimal.valueOf(down)) == -1) {
                 return false;
             }
-            Long aLong = Long.valueOf(typeId);
-            if (!a.getType().equals(aLong)) return false;
-            return true;
+            char[] chars = typeId.toCharArray();
+            for (int i = 0; i < chars.length; i++) {
+                if (a.getType().equals(Integer.valueOf(chars[i]+"").longValue())) return true;
+            }
+            return false;
         }).map(a -> {
             MachineIndivDto machineDto = new MachineIndivDto();
             QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
@@ -52,6 +60,12 @@ public class individuationService {
             return machineDto;
         }).collect(Collectors.toList());
         return Result.success(list);
+    }
+
+
+    public static void main(String[] args) {
+        char a = 'a';
+        System.out.println((int)a -96 );
     }
 }
 

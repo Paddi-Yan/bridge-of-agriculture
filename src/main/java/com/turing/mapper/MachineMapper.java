@@ -20,7 +20,7 @@ public interface MachineMapper extends BaseMapper<Machine> {
 
     List<Machine> latest();
 
-    List<Machine> byCrop(@Param("uid") Integer uid , @Param("did")Integer did);
+    List<Machine> byCrop(@Param("list") List<Integer> list);
 
 
 

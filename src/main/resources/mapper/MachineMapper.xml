@@ -30,7 +30,14 @@
     <select id="byCrop" resultType="com.turing.entity.Machine">
         select distinct m.*
         from sys_machine m ,sys_crop c,sys_crop_machine cm
-        where cm.cropid &lt;= #{uid} and cm.cropid &gt;= #{did} and m.id = cm.machine
+        where  m.id = cm.machine  and c.id = cm.cropid
+        <if test="list !=null and list.size()>0">
+            and c.id in
+            <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+                #{item}
+            </foreach>
+        </if>
+
     </select>
 
 </mapper>
