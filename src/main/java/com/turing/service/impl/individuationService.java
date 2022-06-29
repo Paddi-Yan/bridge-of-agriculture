@@ -1,22 +1,20 @@
 package com.turing.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.generator.config.INameConvert;
 import com.turing.common.Result;
-import com.turing.entity.Dto.MachineDto;
+import com.turing.entity.Crop;
 import com.turing.entity.Dto.MachineIndivDto;
 import com.turing.entity.Machine;
 import com.turing.entity.Picture;
+import com.turing.entity.Type;
 import com.turing.mapper.MachineMapper;
 import com.turing.mapper.PictureMapper;
-import com.turing.mapper.TypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,14 +29,19 @@ public class individuationService {
     TypeServiceImpl typeService;
 
     public Result individuation(Integer area, Integer up, Integer down
-            , Integer peopleNumber, Integer time, String cropType, String typeId) {
+            , Integer peopleNumber, Integer time, List<Crop> cropType, List<Type> typeId) {
 
-        char[] cs = cropType.toCharArray();
         List<Integer> ins = new ArrayList<>();
-        for (int i = 0; i < cs.length; i++) {
-//            ins.add(Integer.valueOf((int)cs[i] - 96));
-            ins.add(Integer.valueOf(cs[i]+""));
+
+        for (Crop crop : cropType) {
+            ins.add(crop.getId());
         }
+
+//        char[] cs = cropType.toCharArray();
+//        for (int i = 0; i < cs.length; i++) {
+////            ins.add(Integer.valueOf((int)cs[i] - 96));
+//            ins.add(Integer.valueOf(cs[i]+""));
+//        }
 
 
         List<Machine> machines = null;
@@ -50,9 +53,12 @@ public class individuationService {
                     || a.getPrice().compareTo(BigDecimal.valueOf(down)) == -1) {
                 return false;
             }
-            char[] chars = typeId.toCharArray();
-            for (int i = 0; i < chars.length; i++) {
-                if (a.getType().equals(Integer.valueOf(chars[i]+"").longValue())) return true;
+//            char[] chars = typeId.toCharArray();
+//            for (int i = 0; i < chars.length; i++) {
+//                if (a.getType().equals(Integer.valueOf(chars[i]+"").longValue())) return true;
+//            }
+            for (Type type : typeId) {
+                if (a.getType().equals(type.getId())) return true;
             }
             return false;
         }).map(a -> {
