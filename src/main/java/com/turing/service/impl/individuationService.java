@@ -29,12 +29,12 @@ public class individuationService {
     TypeServiceImpl typeService;
 
     public Result individuation(Integer area, Integer up, Integer down
-            , Integer peopleNumber, Integer time, List<Crop> cropType, List<Type> typeId) {
+            , Integer peopleNumber, Integer time, int[] cropType, int[] typeId) {
 
         List<Integer> ins = new ArrayList<>();
 
-        for (Crop crop : cropType) {
-            ins.add(crop.getId());
+        for (int crop : cropType) {
+            ins.add(crop);
         }
 
 //        char[] cs = cropType.toCharArray();
@@ -57,8 +57,8 @@ public class individuationService {
 //            for (int i = 0; i < chars.length; i++) {
 //                if (a.getType().equals(Integer.valueOf(chars[i]+"").longValue())) return true;
 //            }
-            for (Type type : typeId) {
-                if (a.getType().equals(type.getId())) return true;
+            for (int type : typeId) {
+                if (a.getType().equals(Integer.valueOf(type).longValue())) return true;
             }
             return false;
         }).map(a -> {

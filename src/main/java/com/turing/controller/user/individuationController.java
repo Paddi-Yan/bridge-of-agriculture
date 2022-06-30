@@ -1,5 +1,6 @@
 package com.turing.controller.user;
 
+import com.alibaba.fastjson.JSON;
 import com.turing.common.Result;
 import com.turing.entity.Crop;
 import com.turing.entity.Type;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 
@@ -23,15 +25,15 @@ public class individuationController {
     @Autowired
     CropService cropService;
 
-    @GetMapping("/individuation")
+    @PostMapping("/individuation")
     @ApiOperation("个性化")
     public Result individuation(@RequestParam(value = "area", required = false) Integer area
             , @RequestParam(value = "up", required = false) Integer up
             , @RequestParam(value = "down", required = false) Integer down
             , @RequestParam(value = "peopleNumber", required = false) Integer peopleNumber
             , @RequestParam(value = "time", required = false) Integer time
-            , @RequestParam(value = "cropType", required = false) @RequestBody() List<Crop> cropType
-            , @RequestParam(value = "typeId", required = false) @RequestBody List<Type> typeId) {
+            , @RequestParam(value = "cropType[]", required = false) int[] cropType
+            , @RequestParam(value = "typeId[]", required = false)  int[] typeId) {
         return individuationService.individuation(area, up, down, peopleNumber, time, cropType, typeId);
     }
 
@@ -48,5 +50,9 @@ public class individuationController {
                                  @RequestParam(value = "lat", required = false) Double lat) {
         return individuationService.getMachineType(lng, lat);
     }
+
+//    public static void main(String[] args) {
+//        JSON.
+//    }
 
 }
